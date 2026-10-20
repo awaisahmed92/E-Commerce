@@ -1,17 +1,17 @@
 {
-  "name": "bias-collection",
+  "name": "khairpur-dates-house-commerce",
   "version": "1.0.0",
   "private": true,
-  "description": "Awais Collection — Full-stack e-commerce platform (Next.js + TypeScript + Prisma)",
+  "description": "Khairpur Dates House — full-stack dates e-commerce platform",
   "scripts": {
     "dev": "node scripts/dev-server.js dev",
     "build": "prisma generate && next build",
     "start": "node scripts/dev-server.js start",
     "db:push": "prisma db push",
-    "db:seed": "tsx prisma/seed.ts"
+    "db:seed": "tsx prisma/seed-dates.ts"
   },
   "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "seed": "tsx prisma/seed-dates.ts"
   },
   "dependencies": {
     "@prisma/client": "5.18.0",

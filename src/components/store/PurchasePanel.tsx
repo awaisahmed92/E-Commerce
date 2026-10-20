@@ -34,7 +34,7 @@ export default function PurchasePanel({ product, promos }: { product: any; promo
   const tryAdd = async () => {
     setError(null);
     if (hasVariants && !variant) {
-      setError("Please select " + [sizes.length && !size ? "a size" : null, colors.length && !color ? "a color" : null].filter(Boolean).join(" and ") + ".");
+      setError("Please select " + [sizes.length && !size ? "a pack size" : null, colors.length && !color ? "an option" : null].filter(Boolean).join(" and ") + ".");
       return;
     }
     setState("busy");
@@ -65,7 +65,7 @@ export default function PurchasePanel({ product, promos }: { product: any; promo
 
       {sizes.length > 0 && (
         <div className="mt-6">
-          <p className="label">Size {size && <span className="ml-1 text-ink">— {size}</span>}</p>
+          <p className="label">Pack Size {size && <span className="ml-1 text-ink">— {size}</span>}</p>
           <div className="flex flex-wrap gap-2">
             {sizes.map((s) => {
               const anyStock = activeVariants.some((v: any) => v.size === s && (!colors.length || !color || v.color === color) && (product.allowBackorder || v.stock - v.reservedStock > 0));
@@ -88,7 +88,7 @@ export default function PurchasePanel({ product, promos }: { product: any; promo
 
       {colors.length > 0 && (
         <div className="mt-5">
-          <p className="label">Color {color && <span className="ml-1 text-ink">— {color}</span>}</p>
+          <p className="label">Option {color && <span className="ml-1 text-ink">— {color}</span>}</p>
           <div className="flex flex-wrap gap-2">
             {colors.map((c) => (
               <button
@@ -153,8 +153,8 @@ export default function PurchasePanel({ product, promos }: { product: any; promo
 
       <div className="mt-6 space-y-2 border-t border-line pt-5 text-[13px] text-ink/60">
         <p>SKU: {variant?.sku ?? product.sku}</p>
-        <p>Free shipping on orders above Rs. 5,000</p>
-        <p>7-day easy exchange · Cash on Delivery available</p>
+        <p>Free nationwide shipping on qualifying orders</p>
+        <p>Food-safe packing · Cash on Delivery available</p>
       </div>
     </div>
   );

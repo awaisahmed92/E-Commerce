@@ -11,7 +11,7 @@ export default function ProductGallery({ images, badges }: { images: { url: stri
         {imgs[active]?.url ? (
           <img src={imgs[active].url} alt={imgs[active].alt || "Product image"} className="h-full w-full object-cover fade-in" key={active} />
         ) : (
-          <div className="grid h-full place-items-center text-[10px] uppercase tracking-[0.3em] text-ink/30">Awais Collection</div>
+          <div className="grid h-full place-items-center text-[10px] uppercase tracking-[0.3em] text-ink/30">Khairpur Dates House</div>
         )}
         {badges && <div className="absolute left-4 top-4 flex flex-col items-start gap-1.5">{badges}</div>}
       </div>

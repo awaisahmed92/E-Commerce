@@ -99,7 +99,7 @@ export default function AdminShell({
         {/* topbar */}
         <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-line bg-white px-4 sm:px-6">
           <button className="lg:hidden" onClick={() => setMobileOpen(true)} aria-label="Open menu"><IconMenu className="h-6 w-6" /></button>
-          <span className="hidden text-[11px] font-bold uppercase tracking-[0.2em] text-ink/50 sm:block">Awais Collection — Admin</span>
+          <span className="hidden text-[11px] font-bold uppercase tracking-[0.2em] text-ink/50 sm:block">Khairpur Dates House — Admin</span>
           <div className="flex items-center gap-4">
             <NotificationBell />
             <div className="flex items-center gap-2.5">

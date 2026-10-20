@@ -93,7 +93,7 @@ export default function FilterBar({ meta }: { meta: Meta }) {
       {/* sizes */}
       {meta.sizes.length > 0 && (
         <div>
-          <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-ink/50">Size</p>
+          <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-ink/50">Pack Size</p>
           <div className="flex flex-wrap gap-2">
             {meta.sizes.map((s) => (
               <button
@@ -111,10 +111,10 @@ export default function FilterBar({ meta }: { meta: Meta }) {
         </div>
       )}
 
-      {/* colors */}
+      {/* additional product options */}
       {meta.colors.length > 0 && (
         <div>
-          <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-ink/50">Color</p>
+          <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-ink/50">Option</p>
           <div className="flex flex-wrap gap-2">
             {meta.colors.map((c) => (
               <button
@@ -137,7 +137,7 @@ export default function FilterBar({ meta }: { meta: Meta }) {
         <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-ink/50">Refine</p>
         {[
           { k: "onSale", label: "On Sale" },
-          { k: "isNew", label: "New Arrivals" },
+          { k: "isNew", label: "Fresh Packs" },
           { k: "inStock", label: "In Stock Only" },
         ].map((t) => (
           <label key={t.k} className="flex cursor-pointer items-center gap-2.5 text-sm text-ink/70">

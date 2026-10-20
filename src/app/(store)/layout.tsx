@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import Header from "@/components/store/Header";
 import Footer from "@/components/store/Footer";
+import NavigationLoader from "@/components/store/NavigationLoader";
 import { listCategories } from "@/services/category.service";
 import { getSession } from "@/lib/auth";
 import { getAllSettings } from "@/services/settings.service";
@@ -12,6 +14,7 @@ export default async function StoreLayout({ children }: { children: React.ReactN
   ]);
   return (
     <div className="flex min-h-screen flex-col">
+      <Suspense fallback={null}><NavigationLoader /></Suspense>
       <Header
         categories={categories.map((c) => ({
           id: c.id,

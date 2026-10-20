@@ -12,7 +12,7 @@ export function safeJsonLd(data: unknown): string {
 }
 
 export const CURRENCY = process.env.NEXT_PUBLIC_CURRENCY || "Rs.";
-export const STORE_NAME = process.env.NEXT_PUBLIC_STORE_NAME || "Awais Collection";
+export const STORE_NAME = process.env.NEXT_PUBLIC_STORE_NAME || "Khairpur Dates House";
 
 export function formatMoney(n: number | null | undefined): string {
   const v = Math.round(Number(n ?? 0));

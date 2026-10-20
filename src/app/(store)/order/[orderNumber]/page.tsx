@@ -123,7 +123,7 @@ export default async function OrderConfirmationPage(
 
       <div className="mt-8 flex justify-center gap-3">
         <Link href="/shop" className="btn-outline">Continue Shopping</Link>
-        <Link href="/account/orders" className="btn-primary">Track in My Account</Link>
+        <Link href="/track-order" className="btn-primary">Track Your Order</Link>
       </div>
     </div>
   );

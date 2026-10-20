@@ -1,15 +1,15 @@
 import prisma from "@/lib/db";
 
 export const DEFAULT_SETTINGS: Record<string, string> = {
-  storeName: "Awais Collection",
-  storeEmail: "hello@biascollection.pk",
+  storeName: "Khairpur Dates House",
+  storeEmail: "hello@khairpurdateshouse.com",
   storePhone: "+92 300 0000000",
   storeAddress: "Clifton, Karachi, Pakistan",
   currency: "Rs.",
   taxRatePercent: "0",
   announcement: "Free shipping on orders above Rs. 5,000",
-  facebookUrl: "https://facebook.com/biascollection",
-  instagramUrl: "https://instagram.com/biascollection",
+  facebookUrl: "",
+  instagramUrl: "",
   twitterUrl: "",
   whatsappNumber: "+92 300 0000000",
   orderPrefix: "BC",

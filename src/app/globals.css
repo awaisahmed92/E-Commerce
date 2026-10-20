@@ -3,17 +3,19 @@
 @tailwind utilities;
 
 @layer base {
-  body { @apply bg-cream text-ink; }
-  ::selection { @apply bg-clay/30; }
+  html { scroll-behavior: smooth; }
+  body { @apply bg-paper text-night; }
+  ::selection { @apply bg-leaf/20 text-night; }
   h1, h2, h3, .font-display { @apply font-serif; }
+  :focus-visible { @apply outline outline-2 outline-offset-2 outline-leaf; }
 }
 
 @layer components {
   .container-x { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
 
   .btn { @apply inline-flex items-center justify-center gap-2 rounded-none px-6 py-3 text-[13px] font-semibold uppercase tracking-[0.18em] transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50; }
-  .btn-primary { @apply btn bg-ink text-cream hover:bg-claydark; }
-  .btn-outline { @apply btn border border-ink bg-transparent text-ink hover:bg-ink hover:text-cream; }
+  .btn-primary { @apply btn bg-leaf text-white hover:bg-night; }
+  .btn-outline { @apply btn border border-night bg-transparent text-night hover:bg-night hover:text-paper; }
   .btn-ghost { @apply btn bg-transparent text-ink underline-offset-4 hover:underline px-3; }
   .btn-sm { @apply px-4 py-2 text-[11px]; }
 
@@ -24,7 +26,7 @@
 
   .badge { @apply inline-flex items-center px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.12em]; }
   .badge-sale { @apply badge bg-rose-600 text-white; }
-  .badge-new { @apply badge bg-ink text-cream; }
+  .badge-new { @apply badge bg-leaf text-white; }
   .badge-flash { @apply badge bg-gold text-white; }
 
   .card { @apply border border-line bg-white; }
@@ -47,6 +49,28 @@
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { scrollbar-width: none; }
+  .paper-rule {
+    background-image: repeating-linear-gradient(to bottom, transparent, transparent 31px, rgba(60, 36, 22, 0.06) 32px);
+  }
+  .loader-pulse { animation: loaderPulse 1.2s ease-in-out infinite; }
+  .loader-line { animation: loaderLine 1s ease-in-out infinite; }
+  @keyframes loaderPulse {
+    0%, 100% { transform: translateY(0) scale(1); opacity: .72; }
+    50% { transform: translateY(-4px) scale(1.04); opacity: 1; }
+  }
+  @keyframes loaderLine {
+    from { transform: translateX(-110%); }
+    to { transform: translateX(210%); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* invoice printing */

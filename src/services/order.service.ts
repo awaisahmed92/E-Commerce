@@ -9,11 +9,11 @@ export async function generateOrderNumber(tx?: any): Promise<string> {
   const year = new Date().getFullYear();
   for (let i = 0; i < 5; i++) {
     const count = await db.order.count();
-    const num = `BC-${year}-${String(10001 + count + (i ? Math.floor(Math.random() * 9) + 1 : 0))}`;
+    const num = `KDH-${year}-${String(10001 + count + (i ? Math.floor(Math.random() * 9) + 1 : 0))}`;
     const exists = await db.order.findUnique({ where: { orderNumber: num } });
     if (!exists) return num;
   }
-  return `BC-${year}-${Date.now().toString(36).toUpperCase()}`;
+  return `KDH-${year}-${Date.now().toString(36).toUpperCase()}`;
 }
 
 export async function adminListOrders(opts: {

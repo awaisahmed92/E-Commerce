@@ -6,6 +6,7 @@ import { useSession } from "@/stores/session";
 import { useCart } from "@/stores/cart";
 import { useWishlist } from "@/stores/wishlist";
 import { IconBag, IconHeart, IconMenu, IconSearch, IconUser, IconX } from "@/components/ui/icons";
+import { BrandLogo } from "@/components/brand-logo";
 import { cn, formatMoney, STORE_NAME } from "@/lib/utils";
 
 type Cat = { id: string; name: string; slug: string; children: { name: string; slug: string }[] };
@@ -73,64 +74,42 @@ export default function Header({
   };
 
   const NAV = [
-    { href: "/", label: "Home" },
-    { href: "/shop", label: "Shop" },
-    { href: "/new-arrivals", label: "New Arrivals" },
-    { href: "/sale", label: "Sale", accent: true },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
+    { href: "/shop?category=whole-dates", label: "Dates" },
+    { href: "/shop?category=gift-boxes", label: "Gift Boxes" },
+    { href: "/shop?category=processed-dates", label: "Date Essentials" },
+    { href: "/varieties", label: "Varieties" },
+    { href: "/house", label: "Our Story" },
+    { href: "/buyers", label: "Bulk Orders" },
+    { href: "/track-order", label: "Track Order" },
   ];
 
   return (
     <header className="sticky top-0 z-40">
       {announcement ? (
-        <div className="bg-ink px-4 py-2 text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-cream/90">
+        <div className="bg-night px-4 py-2 text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-paper/90">
           {announcement}
         </div>
       ) : null}
 
-      <div className="border-b border-line bg-cream/95 backdrop-blur">
-        <div className="container-x flex h-16 items-center justify-between gap-4">
+      <div className="border-b border-night/10 bg-paper/95 backdrop-blur">
+        <div className="container-x flex h-[4.5rem] items-center justify-between gap-4">
           {/* left: mobile menu + logo */}
           <div className="flex items-center gap-3">
             <button className="lg:hidden" onClick={() => setDrawerOpen(true)} aria-label="Open menu">
               <IconMenu className="h-6 w-6" />
             </button>
-            <Link href="/" className="flex flex-col leading-none">
-              <span className="font-serif text-[22px] font-semibold uppercase tracking-[0.08em]">{displayName}</span>
+            <Link href="/" aria-label={`${displayName} home`}>
+              <BrandLogo />
             </Link>
           </div>
 
           {/* center nav */}
           <nav className="hidden items-center gap-7 lg:flex">
             {NAV.map((n) => (
-              <Link key={n.href} href={n.href} className={cn("nav-link", n.accent && "text-rose-700 hover:text-rose-800 after:bg-rose-700")}>
+              <Link key={n.href} href={n.href} className="nav-link">
                 {n.label}
               </Link>
             ))}
-            <div className="group relative">
-              <button className="nav-link flex items-center gap-1">Categories</button>
-              <div className="invisible absolute left-1/2 top-full z-50 w-[480px] -translate-x-1/2 pt-4 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-                <div className="grid grid-cols-3 gap-6 border border-line bg-cream p-6 shadow-xl">
-                  {categories.map((c) => (
-                    <div key={c.id}>
-                      <Link href={`/shop?category=${c.slug}`} className="text-[11px] font-bold uppercase tracking-[0.18em]">
-                        {c.name}
-                      </Link>
-                      <ul className="mt-2 space-y-1.5">
-                        {c.children.map((s) => (
-                          <li key={s.slug}>
-                            <Link href={`/shop?category=${s.slug}`} className="text-[13px] text-ink/60 hover:text-ink">
-                              {s.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
           </nav>
 
           {/* right icons */}
@@ -159,7 +138,7 @@ export default function Header({
                 <IconUser className="h-5 w-5" />
               </button>
               {accountOpen && (
-                <div className="absolute right-0 top-full z-50 mt-3 w-52 border border-line bg-cream p-2 shadow-xl">
+                <div className="absolute right-0 top-full z-50 mt-3 w-52 border border-line bg-paper p-2 shadow-xl">
                   {user ? (
                     <>
                       <div className="border-b border-line px-3 py-2">
@@ -191,14 +170,14 @@ export default function Header({
 
         {/* search bar */}
         {searchOpen && (
-          <div className="border-t border-line bg-cream">
+          <div className="border-t border-line bg-paper">
             <div className="container-x relative py-4">
               <form onSubmit={submitSearch} className="flex gap-3">
                 <input
                   autoFocus
                   value={q}
                   onChange={(e) => setQ(e.target.value)}
-                  placeholder="Search shirts, kurtas, accessories…"
+                  placeholder="Search Aseel, dry dates, gift boxes…"
                   className="input !border-ink/20 !bg-white"
                 />
                 <button type="submit" className="btn-primary btn-sm">Search</button>
@@ -228,9 +207,9 @@ export default function Header({
       {drawerOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-ink/40" onClick={() => setDrawerOpen(false)} />
-          <div className="absolute inset-y-0 left-0 w-[85%] max-w-sm overflow-y-auto bg-cream p-6 shadow-2xl">
+          <div className="absolute inset-y-0 left-0 w-[85%] max-w-sm overflow-y-auto bg-paper p-6 shadow-2xl">
             <div className="mb-6 flex items-center justify-between">
-              <span className="font-serif text-xl font-semibold uppercase tracking-[0.08em]">{displayName}</span>
+              <BrandLogo />
               <button onClick={() => setDrawerOpen(false)} aria-label="Close menu"><IconX className="h-6 w-6" /></button>
             </div>
             <form onSubmit={submitSearch} className="mb-6 flex gap-2">
@@ -239,13 +218,13 @@ export default function Header({
             </form>
             <nav className="space-y-4">
               {NAV.map((n) => (
-                <Link key={n.href} href={n.href} className={cn("block text-sm font-semibold uppercase tracking-[0.18em]", n.accent && "text-rose-700")}>
+                <Link key={n.href} href={n.href} className="block text-sm font-semibold uppercase tracking-[0.18em]">
                   {n.label}
                 </Link>
               ))}
             </nav>
             <div className="mt-8 border-t border-line pt-6">
-              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-ink/50">Categories</p>
+              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-ink/50">Shop by type</p>
               {categories.map((c) => (
                 <div key={c.id} className="mb-4">
                   <Link href={`/shop?category=${c.slug}`} className="text-sm font-semibold">{c.name}</Link>

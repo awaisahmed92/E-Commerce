@@ -106,7 +106,7 @@ export default async function ProductPage(props: { params: Promise<{ slug: strin
       {/* description + reviews */}
       <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-2">
         <div>
-          <h2 className="font-serif text-2xl font-medium">The Details</h2>
+          <h2 className="font-serif text-2xl font-medium">Fruit & Pack Details</h2>
           <p className="mt-4 whitespace-pre-line text-[15px] leading-relaxed text-ink/70">{product.description || product.shortDescription}</p>
           {product.tags && (
             <div className="mt-5 flex flex-wrap gap-2">

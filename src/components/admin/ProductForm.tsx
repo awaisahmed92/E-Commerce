@@ -34,7 +34,7 @@ export default function ProductForm({ categories, initial, defaultMargin }: Prop
     description: initial?.description ?? "",
     sku: initial?.sku ?? "",
     barcode: initial?.barcode ?? "",
-    brand: initial?.brand ?? "Awais Collection",
+    brand: initial?.brand ?? "Khairpur Dates House",
     categoryId: initial?.categoryId ?? "",
     tags: initial?.tags ?? "",
     originalPrice: initial ? String(initial.originalPrice) : "",
@@ -156,7 +156,7 @@ export default function ProductForm({ categories, initial, defaultMargin }: Prop
               </div>
               <div>
                 <label className="admin-label">Slug (auto if empty)</label>
-                <input className="admin-input" value={f.slug} onChange={(e) => set("slug", e.target.value)} placeholder="premium-oxford-shirt" />
+                <input className="admin-input" value={f.slug} onChange={(e) => set("slug", e.target.value)} placeholder="aseel-select-dates" />
               </div>
               <div>
                 <label className="admin-label">Brand</label>
@@ -179,7 +179,7 @@ export default function ProductForm({ categories, initial, defaultMargin }: Prop
               </div>
               <div>
                 <label className="admin-label">Tags (comma separated)</label>
-                <input className="admin-input" value={f.tags} onChange={(e) => set("tags", e.target.value)} placeholder="shirt, cotton, formal" />
+                <input className="admin-input" value={f.tags} onChange={(e) => set("tags", e.target.value)} placeholder="aseel, select, semi-dry, khairpur" />
               </div>
             </div>
           </section>
@@ -215,7 +215,7 @@ export default function ProductForm({ categories, initial, defaultMargin }: Prop
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div>
                 <h2 className="font-serif text-lg">Variants</h2>
-                <p className="text-xs text-ink/40">Sizes / colors with their own SKU & stock. When variants exist, variant stock is used at checkout.</p>
+                <p className="text-xs text-ink/40">Use Size for pack size (500 g, 1 kg, 5 kg). Each pack has its own SKU, price and stock.</p>
               </div>
               <div className="flex gap-2">
                 <button type="button" className="admin-btn-outline !px-3 !py-1.5" onClick={() => setVariants([...variants, newVariant(f.sku || "SKU")])}>+ Add Variant</button>
@@ -237,7 +237,7 @@ export default function ProductForm({ categories, initial, defaultMargin }: Prop
                 <table className="w-full min-w-[720px]">
                   <thead>
                     <tr className="border-b border-line text-left">
-                      <th className="admin-th">Size</th><th className="admin-th">Color</th><th className="admin-th">SKU *</th>
+                      <th className="admin-th">Pack Size</th><th className="admin-th">Option</th><th className="admin-th">SKU *</th>
                       <th className="admin-th">Price (opt)</th><th className="admin-th">Sale (opt)</th><th className="admin-th">Stock</th>
                       <th className="admin-th">Active</th><th className="admin-th"></th>
                     </tr>

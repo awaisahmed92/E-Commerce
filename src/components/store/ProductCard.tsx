@@ -22,7 +22,7 @@ export default function ProductCard({ product, priority = false }: { product: an
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
             />
           ) : (
-            <div className="grid h-full w-full place-items-center text-[10px] uppercase tracking-[0.3em] text-ink/30">Bias</div>
+            <div className="grid h-full w-full place-items-center text-[10px] uppercase tracking-[0.3em] text-ink/30">KDH</div>
           )}
           {img2 && (
             <img

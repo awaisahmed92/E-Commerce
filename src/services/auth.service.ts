@@ -61,7 +61,7 @@ export async function registerCustomer(raw: unknown): Promise<SessionUser> {
   await notify({
     userId: user.id,
     type: "WELCOME",
-    title: "Welcome to Awais Collection",
+    title: "Welcome to Khairpur Dates House",
     message: `Hi ${user.firstName}, your account is ready. Happy shopping!`,
   });
   const session = await toSession(user.id);

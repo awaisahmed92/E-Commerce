@@ -7,5 +7,6 @@ public/uploads/*
 !public/uploads/.gitkeep
 .env
 .env*.local
+.local-setup-complete
 .DS_Store
 .meilisearch-data/

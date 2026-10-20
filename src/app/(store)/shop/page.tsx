@@ -9,7 +9,7 @@ import { EmptyState } from "@/components/ui/primitives";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = { title: "Shop All" };
+export const metadata = { title: "Shop Dates", description: "Shop Aseel, soft, dry, pitted and processed dates from Khairpur Dates House." };
 
 export default async function ShopPage(props: { searchParams: Promise<Record<string, string>> }) {
   const searchParams = await props.searchParams;
@@ -43,7 +43,7 @@ export default async function ShopPage(props: { searchParams: Promise<Record<str
       <div className="container-x">
         <header className="mb-8">
           <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-ink/40">
-            {searchParams.q ? `Search results for "${searchParams.q}"` : "The Collection"}
+            {searchParams.q ? `Search results for "${searchParams.q}"` : "Packed at the source"}
           </p>
           <h1 className="mt-2 font-serif text-4xl font-medium sm:text-5xl">
             {searchParams.category
@@ -54,9 +54,9 @@ export default async function ShopPage(props: { searchParams: Promise<Record<str
                 ? "Sale"
                 : searchParams.isNew === "1"
                   ? "New Arrivals"
-                  : "Shop All"}
+                  : "Shop Dates"}
           </h1>
-          <p className="mt-2 text-sm text-ink/50">{result.total} {result.total === 1 ? "piece" : "pieces"}</p>
+          <p className="mt-2 text-sm text-ink/50">{result.total} {result.total === 1 ? "product" : "products"}</p>
         </header>
       </div>
 
