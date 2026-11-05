@@ -18,6 +18,7 @@ export const categoryInputSchema = z.object({
 export type CategoryInput = z.infer<typeof categoryInputSchema>;
 
 export async function listCategories(includeInactive = false) {
+  if (!process.env.DATABASE_URL) return [];
   const childWhere = includeInactive ? {} : { isActive: true };
   const rows = await prisma.category.findMany({
     where: includeInactive ? {} : { isActive: true },

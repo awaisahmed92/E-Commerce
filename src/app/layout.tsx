@@ -10,6 +10,8 @@ const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono", display: 
 const display = Fraunces({ subsets: ["latin"], variable: "--font-display", display: "swap" });
 const arabic = Amiri({ subsets: ["arabic", "latin"], weight: ["400", "700"], variable: "--font-arabic", display: "swap" });
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getAllSettings();
   const storeName = settings.storeName || STORE_NAME;

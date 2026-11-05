@@ -6,6 +6,8 @@ import { listCategories } from "@/services/category.service";
 import { getSession } from "@/lib/auth";
 import { getAllSettings } from "@/services/settings.service";
 
+export const dynamic = "force-dynamic";
+
 export default async function StoreLayout({ children }: { children: React.ReactNode }) {
   const [categories, session, settings] = await Promise.all([
     listCategories(false),

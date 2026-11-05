@@ -2,12 +2,16 @@ import type { MetadataRoute } from "next";
 import prisma from "@/lib/db";
 import { varieties } from "@/lib/content";
 
+export const dynamic = "force-dynamic";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-  const [products, categories] = await Promise.all([
-    prisma.product.findMany({ where: { status: "ACTIVE" }, select: { slug: true, updatedAt: true } }),
-    prisma.category.findMany({ where: { isActive: true }, select: { slug: true } }),
-  ]);
+  const [products, categories] = process.env.DATABASE_URL
+    ? await Promise.all([
+        prisma.product.findMany({ where: { status: "ACTIVE" }, select: { slug: true, updatedAt: true } }),
+        prisma.category.findMany({ where: { isActive: true }, select: { slug: true } }),
+      ])
+    : [[], []];
   return [
     { url: base, lastModified: new Date(), priority: 1 },
     { url: `${base}/shop`, lastModified: new Date(), priority: 0.9 },

@@ -18,7 +18,12 @@ export const DEFAULT_SETTINGS: Record<string, string> = {
   defaultMarginValue: "0",
 };
 
+function databaseConfigured() {
+  return Boolean(process.env.DATABASE_URL);
+}
+
 export async function getSetting(key: string, fallback = ""): Promise<string> {
+  if (!databaseConfigured()) return DEFAULT_SETTINGS[key] ?? fallback;
   const row = await prisma.setting.findUnique({ where: { key } });
   return row?.value ?? DEFAULT_SETTINGS[key] ?? fallback;
 }
@@ -30,6 +35,7 @@ export async function getSettingNumber(key: string, fallback = 0): Promise<numbe
 }
 
 export async function getAllSettings(): Promise<Record<string, string>> {
+  if (!databaseConfigured()) return { ...DEFAULT_SETTINGS };
   const rows = await prisma.setting.findMany();
   const map: Record<string, string> = { ...DEFAULT_SETTINGS };
   rows.forEach((r) => (map[r.key] = r.value));
