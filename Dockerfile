@@ -8,9 +8,18 @@ RUN apt-get update \
 
 COPY package.json package-lock.json ./
 COPY prisma ./prisma
-RUN npm ci
+RUN npm ci --no-audit --no-fund
 
 COPY . .
+
+ARG NEXT_PUBLIC_SITE_URL=https://www.khairpurdateshouse.com
+ARG NEXT_PUBLIC_STORE_NAME=Khairpur Dates House
+ARG NEXT_PUBLIC_CURRENCY=Rs.
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+ENV NEXT_PUBLIC_STORE_NAME=$NEXT_PUBLIC_STORE_NAME
+ENV NEXT_PUBLIC_CURRENCY=$NEXT_PUBLIC_CURRENCY
+ENV NEXT_TELEMETRY_DISABLED=1
+
 RUN npm run build
 
 ENV NODE_ENV=production
