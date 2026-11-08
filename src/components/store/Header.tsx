@@ -7,6 +7,7 @@ import { useCart } from "@/stores/cart";
 import { useWishlist } from "@/stores/wishlist";
 import { IconBag, IconHeart, IconMenu, IconSearch, IconUser, IconX } from "@/components/ui/icons";
 import { BrandLogo } from "@/components/brand-logo";
+import { SocialLinks } from "@/components/store/SocialLinks";
 import { cn, formatMoney, STORE_NAME } from "@/lib/utils";
 
 type Cat = { id: string; name: string; slug: string; children: { name: string; slug: string }[] };
@@ -17,12 +18,14 @@ export default function Header({
   announcement,
   storeName,
   logoUrl,
+  social,
 }: {
   categories: Cat[];
   initialUser: { firstName: string; lastName: string; email: string; role: string } | null;
   announcement?: string;
   storeName?: string;
   logoUrl?: string;
+  social?: { facebookUrl?: string; instagramUrl?: string; linkedinUrl?: string; whatsappNumber?: string };
 }) {
   const displayName = storeName || STORE_NAME;
   const router = useRouter();
@@ -116,6 +119,7 @@ export default function Header({
 
           {/* right icons */}
           <div className="flex items-center gap-4 sm:gap-5">
+            <SocialLinks {...social} className="mr-1 hidden md:flex" />
             <button onClick={() => setSearchOpen((v) => !v)} aria-label="Search">
               <IconSearch className="h-5 w-5" />
             </button>
@@ -240,6 +244,7 @@ export default function Header({
                 </div>
               ))}
             </div>
+            <SocialLinks {...social} className="mt-8" />
             <div className="mt-8 border-t border-line pt-6">
               {user ? (
                 <>

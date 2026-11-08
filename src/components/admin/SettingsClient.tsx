@@ -12,8 +12,9 @@ const FIELDS: { key: string; label: string; hint?: string; type?: string }[] = [
   { key: "storeAddress", label: "Store Address" },
   { key: "taxRatePercent", label: "Tax Rate %", hint: "Applied on discounted subtotal at checkout", type: "number" },
   { key: "announcement", label: "Announcement Bar Text", hint: "Shown at the very top of the storefront" },
-  { key: "facebookUrl", label: "Facebook URL" },
-  { key: "instagramUrl", label: "Instagram URL" },
+  { key: "facebookUrl", label: "Facebook URL", hint: "Icon in the header and footer. Leave empty to hide it." },
+  { key: "instagramUrl", label: "Instagram URL", hint: "Icon in the header and footer. Leave empty to hide it." },
+  { key: "linkedinUrl", label: "LinkedIn URL", hint: "Icon in the header and footer. Leave empty to hide it." },
   { key: "whatsappNumber", label: "WhatsApp Number" },
 ];
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import NewsletterForm from "./NewsletterForm";
 import { IconShield, IconTruck, IconRefresh } from "@/components/ui/icons";
 import { BrandLogo } from "@/components/brand-logo";
+import { SocialLinks } from "@/components/store/SocialLinks";
 import { STORE_NAME } from "@/lib/utils";
 
 export default function Footer({ settings }: { settings: Record<string, string> }) {
@@ -40,30 +41,14 @@ export default function Footer({ settings }: { settings: Record<string, string> 
             <p className="mt-6 font-mono text-[9px] uppercase tracking-[0.24em] text-paper/40">
               Variety · Grade · Origin · Pack
             </p>
-            {(settings.facebookUrl || settings.instagramUrl || settings.whatsappNumber) && (
-              <div className="mt-6 flex flex-wrap gap-3 text-xs font-semibold uppercase tracking-[0.13em]">
-                {settings.facebookUrl && (
-                  <a href={settings.facebookUrl} target="_blank" rel="noopener noreferrer" className="border border-paper/20 px-3 py-2 hover:border-paper/60">
-                    Facebook
-                  </a>
-                )}
-                {settings.instagramUrl && (
-                  <a href={settings.instagramUrl} target="_blank" rel="noopener noreferrer" className="border border-paper/20 px-3 py-2 hover:border-paper/60">
-                    Instagram
-                  </a>
-                )}
-                {whatsapp && (
-                  <a
-                    href={`https://wa.me/${whatsapp}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="border border-paper/20 px-3 py-2 hover:border-paper/60"
-                  >
-                    WhatsApp
-                  </a>
-                )}
-              </div>
-            )}
+            <SocialLinks
+              className="mt-6"
+              tone="light"
+              facebookUrl={settings.facebookUrl}
+              instagramUrl={settings.instagramUrl}
+              linkedinUrl={settings.linkedinUrl}
+              whatsappNumber={settings.whatsappNumber}
+            />
           </div>
 
           <div>

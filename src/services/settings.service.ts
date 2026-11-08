@@ -11,6 +11,7 @@ export const DEFAULT_SETTINGS: Record<string, string> = {
   announcement: "Free shipping on orders above Rs. 5,000",
   facebookUrl: "",
   instagramUrl: "",
+  linkedinUrl: "",
   twitterUrl: "",
   whatsappNumber: "923710300085",
   orderPrefix: "BC",
@@ -23,7 +24,7 @@ export const DEFAULT_SETTINGS: Record<string, string> = {
 
 function cleanSetting(key: string, value: string) {
   if (key === "themeColor") return normalizeThemeColor(value);
-  if (key === "logoUrl") return sanitizeLogoUrl(value);
+  if (key === "logoUrl" || key === "facebookUrl" || key === "instagramUrl" || key === "linkedinUrl") return sanitizeLogoUrl(value);
   return value;
 }
 

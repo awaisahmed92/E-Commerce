@@ -28,6 +28,12 @@ export default async function StoreLayout({ children }: { children: React.ReactN
         announcement={settings.announcement}
         storeName={settings.storeName}
         logoUrl={settings.logoUrl}
+        social={{
+          facebookUrl: settings.facebookUrl,
+          instagramUrl: settings.instagramUrl,
+          linkedinUrl: settings.linkedinUrl,
+          whatsappNumber: settings.whatsappNumber,
+        }}
       />
       <main className="flex-1">{children}</main>
       <Footer settings={settings} />
