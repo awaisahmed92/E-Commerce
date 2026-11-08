@@ -25,6 +25,7 @@ const NAV: NavItem[] = [
   { href: "/admin/payments", label: "Payment Methods", perm: "payments.manage", group: "Configuration" },
   { href: "/admin/users", label: "Users & Roles", perm: "users.manage", group: "Configuration" },
   { href: "/admin/settings", label: "Settings", perm: "settings.manage", group: "Configuration" },
+  { href: "/admin/account", label: "Change Password", group: "Configuration" },
   { href: "/admin/audit", label: "Audit Log", perm: "audit.view", group: "Configuration" },
 ];
 
