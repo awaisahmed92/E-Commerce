@@ -2,8 +2,8 @@ import prisma from "@/lib/db";
 
 export const DEFAULT_SETTINGS: Record<string, string> = {
   storeName: "Khairpur Dates House",
-  storeEmail: "hello@khairpurdateshouse.com",
-  storePhone: "+92 300 0000000",
+  storeEmail: "farhad@khairpurdateshouse.com",
+  storePhone: "0371 0300085",
   storeAddress: "Clifton, Karachi, Pakistan",
   currency: "Rs.",
   taxRatePercent: "0",
@@ -11,7 +11,7 @@ export const DEFAULT_SETTINGS: Record<string, string> = {
   facebookUrl: "",
   instagramUrl: "",
   twitterUrl: "",
-  whatsappNumber: "+92 300 0000000",
+  whatsappNumber: "923710300085",
   orderPrefix: "BC",
   lowStockDefaultThreshold: "5",
   defaultMarginType: "percent",

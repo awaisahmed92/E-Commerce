@@ -2,14 +2,13 @@ export const site = {
   name: "Khairpur Dates House",
   short: "KDH",
   url: "https://khairpurdateshouse.com",
-  email: "hello@khairpurdateshouse.com",
+  email: "farhad@khairpurdateshouse.com",
   /**
-   * Set these before launch. Leave blank rather than inventing a number.
    * whatsapp: digits only, country code included, no plus sign.
    */
-  phoneDisplay: "",
-  phoneHref: "",
-  whatsapp: "",
+  phoneDisplay: "0371 0300085",
+  phoneHref: "tel:+923710300085",
+  whatsapp: "923710300085",
   locality: "Khairpur Mirs",
   region: "Sindh, Pakistan",
   address: "Khairpur Mirs, Sindh, Pakistan",

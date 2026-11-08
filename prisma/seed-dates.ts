@@ -373,15 +373,15 @@ async function seedCatalog() {
 async function seedStoreConfiguration() {
   const settings: Record<string, string> = {
     storeName: "Khairpur Dates House",
-    storeEmail: "hello@khairpurdateshouse.com",
-    storePhone: "",
+    storeEmail: "farhad@khairpurdateshouse.com",
+    storePhone: "0371 0300085",
     storeAddress: "Khairpur Mirs, Sindh, Pakistan",
     currency: "Rs.",
     taxRatePercent: "0",
     announcement: "Premium dates from Khairpur — nationwide delivery across Pakistan",
     instagramUrl: "",
     facebookUrl: "",
-    whatsappNumber: "",
+    whatsappNumber: "923710300085",
   };
   for (const [key, value] of Object.entries(settings)) {
     await prisma.setting.upsert({ where: { key }, update: { value }, create: { key, value } });

@@ -21,12 +21,12 @@ export default async function ContactPage() {
               Product questions, order support or a serious wholesale enquiry—speak directly with the people packing your dates in Khairpur.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
-              <a href="tel:+923163686663" className="inline-flex items-center gap-3 rounded-full bg-clay px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-clay/85">
-                Call Farhat
+              <a href="tel:+923710300085" className="inline-flex items-center gap-3 rounded-full bg-clay px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-clay/85">
+                Call Farhad
                 <IconArrowRight className="h-4 w-4" />
               </a>
               <a
-                href="https://wa.me/923163686663"
+                href="https://wa.me/923710300085"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-full border border-paper/25 px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] transition-colors hover:border-paper/60"
@@ -62,14 +62,14 @@ export default async function ContactPage() {
         <div className="grid overflow-hidden rounded-3xl border border-night/10 bg-paper shadow-[0_24px_70px_rgba(49,31,20,.08)] md:grid-cols-3">
           <div className="border-b border-night/10 p-7 md:border-b-0 md:border-r sm:p-8">
             <p className="font-mono text-[9px] uppercase tracking-[0.25em] text-clay">Owner &amp; sales</p>
-            <h2 className="mt-3 font-display text-3xl">Farhat</h2>
-            <a href="tel:+923163686663" className="mt-4 block text-sm text-night/60 hover:text-clay">0316 3686663</a>
+            <h2 className="mt-3 font-display text-3xl">Farhad</h2>
+            <a href="tel:+923710300085" className="mt-4 block text-sm text-night/60 hover:text-clay">0371 0300085</a>
           </div>
           <div className="border-b border-night/10 p-7 md:border-b-0 md:border-r sm:p-8">
             <p className="font-mono text-[9px] uppercase tracking-[0.25em] text-clay">Email us</p>
             <h2 className="mt-3 font-display text-3xl">Customer care</h2>
             <a href={`mailto:${settings.storeEmail}`} className="mt-4 block break-all text-sm text-night/60 hover:text-clay">
-              {settings.storeEmail || "hello@khairpurdateshouse.com"}
+              {settings.storeEmail || "farhad@khairpurdateshouse.com"}
             </a>
           </div>
           <div className="p-7 sm:p-8">
