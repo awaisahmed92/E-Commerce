@@ -34,8 +34,8 @@ export default async function AdminOrderDetail(props: { params: Promise<{ id: st
           <div className="admin-card">
             <div className="flex items-start justify-between border-b border-line pb-4">
               <div>
-                <p className="font-serif text-2xl font-semibold tracking-[0.08em]">BIAS</p>
-                <p className="text-[9px] font-semibold uppercase tracking-[0.42em] text-ink/50">Collection</p>
+                <p className="font-serif text-2xl font-semibold tracking-[0.04em]">Farhad</p>
+                <p className="text-[9px] font-semibold uppercase tracking-[0.42em] text-ink/50">Dates House</p>
               </div>
               <div className="text-right text-sm">
                 <p className="font-bold">INVOICE {order.orderNumber}</p>

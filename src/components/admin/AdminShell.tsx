@@ -48,7 +48,7 @@ export default function AdminShell({
   const sidebar = (
     <div className="flex h-full flex-col bg-ink text-cream/80">
       <Link href="/admin" className="flex items-baseline gap-2 border-b border-cream/10 px-5 py-5">
-        <span className="font-serif text-xl font-semibold tracking-[0.08em] text-cream">BIAS</span>
+        <span className="font-serif text-xl font-semibold tracking-[0.04em] text-cream">Farhad</span>
         <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-clay">Admin</span>
       </Link>
       <nav className="flex-1 overflow-y-auto py-4 no-scrollbar">
