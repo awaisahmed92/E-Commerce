@@ -17,7 +17,7 @@ export default function PromoBanner({ banner }: { banner: any }) {
         className="h-[220px] w-full object-cover sm:hidden"
       />
       {(banner.title || banner.subtitle || banner.buttonText) && (
-        <div className="absolute inset-0 flex items-center bg-ink/30">
+        <div className="absolute inset-0 flex items-center bg-brand/30">
           <div className="container-x">
             <div className="max-w-lg text-cream">
               {banner.title && <h2 className="font-serif text-3xl font-medium sm:text-4xl">{banner.title}</h2>}

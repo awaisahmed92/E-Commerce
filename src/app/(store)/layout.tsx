@@ -16,7 +16,7 @@ export default async function StoreLayout({ children }: { children: React.ReactN
   ]);
   return (
     <div className="flex min-h-screen flex-col">
-      <Suspense fallback={null}><NavigationLoader /></Suspense>
+      <Suspense fallback={null}><NavigationLoader logoUrl={settings.logoUrl} /></Suspense>
       <Header
         categories={categories.map((c) => ({
           id: c.id,
@@ -27,6 +27,7 @@ export default async function StoreLayout({ children }: { children: React.ReactN
         initialUser={session ? { firstName: session.firstName, lastName: session.lastName, email: session.email, role: session.role } : null}
         announcement={settings.announcement}
         storeName={settings.storeName}
+        logoUrl={settings.logoUrl}
       />
       <main className="flex-1">{children}</main>
       <Footer settings={settings} />

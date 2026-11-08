@@ -16,11 +16,13 @@ export default function Header({
   initialUser,
   announcement,
   storeName,
+  logoUrl,
 }: {
   categories: Cat[];
   initialUser: { firstName: string; lastName: string; email: string; role: string } | null;
   announcement?: string;
   storeName?: string;
+  logoUrl?: string;
 }) {
   const displayName = storeName || STORE_NAME;
   const router = useRouter();
@@ -86,7 +88,7 @@ export default function Header({
   return (
     <header className="sticky top-0 z-40">
       {announcement ? (
-        <div className="bg-night px-4 py-2 text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-paper/90">
+        <div className="bg-brand px-4 py-2 text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-paper/90">
           {announcement}
         </div>
       ) : null}
@@ -99,7 +101,7 @@ export default function Header({
               <IconMenu className="h-6 w-6" />
             </button>
             <Link href="/" aria-label={`${displayName} home`}>
-              <BrandLogo />
+              <BrandLogo logoUrl={logoUrl} />
             </Link>
           </div>
 
@@ -120,7 +122,7 @@ export default function Header({
             <Link href={user ? "/account/wishlist" : "/wishlist"} className="relative" aria-label="Wishlist">
               <IconHeart className="h-5 w-5" />
               {wishlistCount > 0 && (
-                <span className="absolute -right-2 -top-2 grid h-4 min-w-4 place-items-center rounded-full bg-ink px-1 text-[9px] font-bold text-cream">
+                <span className="absolute -right-2 -top-2 grid h-4 min-w-4 place-items-center rounded-full bg-brand px-1 text-[9px] font-bold text-cream">
                   {wishlistCount}
                 </span>
               )}
@@ -128,7 +130,7 @@ export default function Header({
             <Link href="/cart" className="relative" aria-label="Shopping cart">
               <IconBag className="h-5 w-5" />
               {cartCount > 0 && (
-                <span className="absolute -right-2 -top-2 grid h-4 min-w-4 place-items-center rounded-full bg-ink px-1 text-[9px] font-bold text-cream">
+                <span className="absolute -right-2 -top-2 grid h-4 min-w-4 place-items-center rounded-full bg-brand px-1 text-[9px] font-bold text-cream">
                   {cartCount}
                 </span>
               )}
@@ -206,10 +208,10 @@ export default function Header({
       {/* mobile drawer */}
       {drawerOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="absolute inset-0 bg-ink/40" onClick={() => setDrawerOpen(false)} />
+          <div className="absolute inset-0 bg-brand/40" onClick={() => setDrawerOpen(false)} />
           <div className="absolute inset-y-0 left-0 w-[85%] max-w-sm overflow-y-auto bg-paper p-6 shadow-2xl">
             <div className="mb-6 flex items-center justify-between">
-              <BrandLogo />
+              <BrandLogo logoUrl={logoUrl} />
               <button onClick={() => setDrawerOpen(false)} aria-label="Close menu"><IconX className="h-6 w-6" /></button>
             </div>
             <form onSubmit={submitSearch} className="mb-6 flex gap-2">

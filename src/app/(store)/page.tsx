@@ -16,7 +16,7 @@ export default async function HomePage() {
 
   return (
     <div className="fade-in">
-      <section className="relative min-h-[560px] overflow-hidden bg-night text-white sm:min-h-[680px]">
+      <section className="relative min-h-[560px] overflow-hidden bg-brand text-white sm:min-h-[680px]">
         <video
           className="absolute inset-0 h-full w-full object-cover"
           autoPlay

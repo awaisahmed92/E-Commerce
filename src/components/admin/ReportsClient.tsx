@@ -34,7 +34,7 @@ export default function ReportsClient({ report, preset, from, to }: { report: an
           <button
             key={k}
             onClick={() => goto({ preset: k })}
-            className={cn("border px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em]", preset === k ? "border-ink bg-ink text-cream" : "border-line bg-white hover:border-ink")}
+            className={cn("border px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em]", preset === k ? "border-brand bg-brand text-cream" : "border-line bg-white hover:border-ink")}
           >
             {label}
           </button>

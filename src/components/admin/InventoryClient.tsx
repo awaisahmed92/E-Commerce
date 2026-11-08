@@ -182,7 +182,7 @@ export default function InventoryClient({
       {/* adjust modal */}
       {adjusting && (
         <div className="fixed inset-0 z-50 grid place-items-center p-4">
-          <div className="absolute inset-0 bg-ink/50" onClick={() => setAdjusting(null)} />
+          <div className="absolute inset-0 bg-brand/50" onClick={() => setAdjusting(null)} />
           <form onSubmit={submitAdjust} className="relative w-full max-w-md border border-line bg-white p-6 shadow-2xl">
             <h3 className="font-serif text-xl">Adjust Stock</h3>
             <p className="mt-1 text-sm text-ink/60">{adjusting.name} — current: <b>{adjusting.current}</b></p>

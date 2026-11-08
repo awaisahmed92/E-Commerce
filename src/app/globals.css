@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --brand: 60 36 22;
+  --brand-dark: 50 30 18;
+}
+
 @layer base {
   html { scroll-behavior: smooth; }
   body { @apply bg-paper text-night; }
@@ -14,8 +19,8 @@
   .container-x { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
 
   .btn { @apply inline-flex items-center justify-center gap-2 rounded-none px-6 py-3 text-[13px] font-semibold uppercase tracking-[0.18em] transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50; }
-  .btn-primary { @apply btn bg-leaf text-white hover:bg-night; }
-  .btn-outline { @apply btn border border-night bg-transparent text-night hover:bg-night hover:text-paper; }
+  .btn-primary { @apply btn bg-leaf text-white hover:bg-branddark; }
+  .btn-outline { @apply btn border border-brand bg-transparent text-brand hover:bg-brand hover:text-paper; }
   .btn-ghost { @apply btn bg-transparent text-ink underline-offset-4 hover:underline px-3; }
   .btn-sm { @apply px-4 py-2 text-[11px]; }
 
@@ -36,10 +41,10 @@
   .admin-input { @apply w-full border border-line bg-white px-3 py-2 text-sm focus:border-claydark focus:outline-none; }
   .admin-label { @apply mb-1 block text-[10px] font-bold uppercase tracking-[0.12em] text-ink/60; }
   .admin-card { @apply border border-line bg-white p-5; }
-  .admin-btn { @apply inline-flex items-center gap-2 bg-ink px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-cream transition-colors hover:bg-claydark disabled:opacity-50; }
-  .admin-btn-outline { @apply inline-flex items-center gap-2 border border-ink/30 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-ink transition-colors hover:bg-ink hover:text-cream; }
+  .admin-btn { @apply inline-flex items-center gap-2 bg-brand px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-cream transition-colors hover:bg-branddark disabled:opacity-50; }
+  .admin-btn-outline { @apply inline-flex items-center gap-2 border border-brand/30 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-ink transition-colors hover:bg-brand hover:text-cream; }
 
-  .nav-link { @apply relative text-[12px] font-semibold uppercase tracking-[0.18em] text-ink/80 transition-colors hover:text-ink after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-ink after:transition-all hover:after:w-full; }
+  .nav-link { @apply relative text-[12px] font-semibold uppercase tracking-[0.18em] text-ink/80 transition-colors hover:text-ink after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-brand after:transition-all hover:after:w-full; }
 }
 
 @layer utilities {

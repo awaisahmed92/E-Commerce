@@ -4,19 +4,25 @@ export function BrandLogo({
   light = false,
   compact = false,
   className,
+  logoUrl,
 }: {
   light?: boolean;
   compact?: boolean;
   className?: string;
+  logoUrl?: string;
 }) {
+  const mark = logoUrl?.trim();
   return (
     <span className={cn("inline-flex items-center gap-3", className)}>
       <span
         className={cn(
-          "grid h-12 w-12 shrink-0 place-items-center rounded-t-[1.35rem] rounded-b-lg border",
-          light ? "border-paper/30 bg-paper text-night" : "border-night/15 bg-night text-paper",
+          "grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-t-[1.35rem] rounded-b-lg border",
+          light ? "border-paper/30 bg-paper text-night" : "border-night/15 bg-brand text-paper",
         )}
       >
+        {mark ? (
+          <img src={mark} alt="" className="h-9 w-9 object-contain" />
+        ) : (
         <svg viewBox="0 0 48 48" className="h-9 w-9" aria-hidden="true">
           <path d="M24 39V15" fill="none" stroke="currentColor" strokeWidth="1.6" />
           <path d="M24 18C19 11 12 11 8 14c3 6 9 9 16 4Z" fill="none" stroke="currentColor" strokeWidth="1.6" />
@@ -26,6 +32,7 @@ export function BrandLogo({
           <ellipse cx="25" cy="34" rx="4.2" ry="6.3" fill="currentColor" opacity=".72" />
           <ellipse cx="33" cy="30" rx="4.2" ry="6.3" fill="currentColor" opacity=".9" />
         </svg>
+        )}
       </span>
       {!compact && (
         <span className="leading-none">

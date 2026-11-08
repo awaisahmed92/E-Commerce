@@ -11,7 +11,7 @@ export default async function ContactPage() {
   return (
     <main>
       <section className="bg-sand/35 px-4 py-5 sm:px-6 sm:py-8">
-        <div className="mx-auto grid max-w-[1380px] overflow-hidden rounded-[2rem] bg-night lg:min-h-[590px] lg:grid-cols-[.9fr_1.1fr]">
+        <div className="mx-auto grid max-w-[1380px] overflow-hidden rounded-[2rem] bg-brand lg:min-h-[590px] lg:grid-cols-[.9fr_1.1fr]">
           <div className="flex flex-col justify-center px-7 py-14 text-paper sm:px-12 lg:px-16 lg:py-20">
             <p className="font-mono text-[10px] uppercase tracking-[0.34em] text-sand">Contact the house</p>
             <h1 className="mt-6 max-w-xl font-display text-5xl leading-[.98] sm:text-6xl lg:text-7xl">
@@ -45,7 +45,7 @@ export default async function ContactPage() {
               className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-night/45 via-transparent to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between rounded-2xl border border-white/20 bg-night/55 p-5 text-paper backdrop-blur-md sm:bottom-8 sm:left-8 sm:right-8">
+            <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between rounded-2xl border border-white/20 bg-brand/55 p-5 text-paper backdrop-blur-md sm:bottom-8 sm:left-8 sm:right-8">
               <div>
                 <p className="text-[9px] uppercase tracking-[0.25em] text-paper/55">Our home</p>
                 <p className="mt-1 font-display text-2xl">Khairpur Mirs, Sindh</p>

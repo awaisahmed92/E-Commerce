@@ -50,7 +50,7 @@ export default function PaymentsClient({ methods, transactions }: { methods: any
               <button
                 disabled={busy === m.key}
                 onClick={() => toggle(m)}
-                className={cn("relative h-6 w-11 rounded-full transition-colors", m.isEnabled ? "bg-emerald-600" : "bg-ink/20")}
+                className={cn("relative h-6 w-11 rounded-full transition-colors", m.isEnabled ? "bg-emerald-600" : "bg-brand/20")}
                 aria-label={`Toggle ${m.name}`}
               >
                 <span className={cn("absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all", m.isEnabled ? "left-[22px]" : "left-0.5")} />

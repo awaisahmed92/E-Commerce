@@ -14,6 +14,7 @@ const NAV: NavItem[] = [
   { href: "/admin/categories", label: "Categories", perm: "categories.manage", group: "Catalog" },
   { href: "/admin/inventory", label: "Inventory", perm: "inventory.view", group: "Catalog" },
   { href: "/admin/orders", label: "Orders", perm: "orders.view", group: "Sales" },
+  { href: "/admin/inquiries", label: "Inquiries", perm: "customers.view", group: "Sales" },
   { href: "/admin/customers", label: "Customers", perm: "customers.view", group: "Sales" },
   { href: "/admin/promotions", label: "Sales & Promotions", perm: "promotions.manage", group: "Marketing" },
   { href: "/admin/coupons", label: "Coupons", perm: "coupons.manage", group: "Marketing" },
@@ -31,10 +32,12 @@ const NAV: NavItem[] = [
 
 export default function AdminShell({
   user,
+  logoUrl,
   children,
 }: {
   user: { name: string; email: string; role: string; permissions: string[] };
   notifications?: any[];
+  logoUrl?: string;
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
@@ -46,10 +49,11 @@ export default function AdminShell({
   const groups = [...new Set(NAV.map((n) => n.group))];
 
   const sidebar = (
-    <div className="flex h-full flex-col bg-ink text-cream/80">
-      <Link href="/admin" className="flex items-baseline gap-2 border-b border-cream/10 px-5 py-5">
+    <div className="flex h-full flex-col bg-brand text-cream/80">
+      <Link href="/admin" className="flex items-center gap-2 border-b border-cream/10 px-5 py-5">
+        {logoUrl ? <img src={logoUrl} alt="" className="h-8 w-8 rounded-md bg-cream/10 object-contain" /> : null}
         <span className="font-serif text-xl font-semibold tracking-[0.04em] text-cream">Farhad</span>
-        <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-clay">Admin</span>
+        <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-cream/50">Admin</span>
       </Link>
       <nav className="flex-1 overflow-y-auto py-4 no-scrollbar">
         {groups.map((g) => {
@@ -91,7 +95,7 @@ export default function AdminShell({
       {/* mobile sidebar */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="absolute inset-0 bg-ink/50" onClick={() => setMobileOpen(false)} />
+          <div className="absolute inset-0 bg-brand/50" onClick={() => setMobileOpen(false)} />
           <aside className="absolute inset-y-0 left-0 w-64">{sidebar}</aside>
         </div>
       )}
@@ -104,7 +108,7 @@ export default function AdminShell({
           <div className="flex items-center gap-4">
             <NotificationBell />
             <div className="flex items-center gap-2.5">
-              <span className="grid h-8 w-8 place-items-center rounded-full bg-ink font-serif text-xs text-cream">{initials(user.name)}</span>
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-brand font-serif text-xs text-cream">{initials(user.name)}</span>
               <div className="hidden text-right sm:block">
                 <p className="text-xs font-semibold leading-tight">{user.name}</p>
                 <p className="text-[10px] uppercase tracking-[0.12em] text-claydark">{user.role}</p>

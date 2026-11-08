@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { BrandLogo } from "@/components/brand-logo";
 
-export default function NavigationLoader() {
+export default function NavigationLoader({ logoUrl }: { logoUrl?: string }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
@@ -37,7 +37,7 @@ export default function NavigationLoader() {
   return (
     <div className="fixed inset-0 z-[100] grid place-items-center bg-paper/92 backdrop-blur-sm" role="status" aria-live="polite">
       <div className="flex flex-col items-center">
-        <span className="loader-pulse"><BrandLogo compact /></span>
+        <span className="loader-pulse"><BrandLogo compact logoUrl={logoUrl} /></span>
         <span className="mt-5 font-mono text-[10px] uppercase tracking-[0.28em] text-mist">Opening the house</span>
         <span className="mt-4 h-px w-32 overflow-hidden bg-line">
           <span className="loader-line block h-full w-1/2 bg-leaf" />

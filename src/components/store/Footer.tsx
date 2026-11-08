@@ -27,13 +27,13 @@ export default function Footer({ settings }: { settings: Record<string, string> 
         </div>
       </div>
 
-      <div className="relative overflow-hidden bg-night text-paper/80">
+      <div className="relative overflow-hidden bg-brand text-paper/80">
         <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full border border-paper/5" />
         <div className="pointer-events-none absolute -bottom-48 right-24 h-96 w-96 rounded-full border border-paper/5" />
 
         <div className="container-x grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.15fr_.8fr_1fr_1.1fr]">
           <div>
-            <BrandLogo light />
+            <BrandLogo light logoUrl={settings.logoUrl} />
             <p className="mt-6 max-w-sm text-sm leading-7 text-paper/60">
               Premium Aseel and selected dates, sorted by hand and packed at the source in Khairpur Mirs, Sindh.
             </p>

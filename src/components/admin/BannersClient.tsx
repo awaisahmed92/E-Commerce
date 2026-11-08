@@ -109,7 +109,7 @@ export default function BannersClient({ banners }: { banners: any[] }) {
             <div className="relative h-44 bg-sand">
               {b.desktopImage && <img src={b.desktopImage} alt="" className="h-full w-full object-cover" />}
               <div className="absolute left-3 top-3 flex gap-1.5">
-                <span className="badge bg-ink text-cream">{POSITIONS.find(([v]) => v === b.position)?.[1] ?? b.position}</span>
+                <span className="badge bg-brand text-cream">{POSITIONS.find(([v]) => v === b.position)?.[1] ?? b.position}</span>
                 <span className={cn("badge", b.live ? "bg-emerald-600 text-white" : "bg-white/90 text-ink/60")}>{b.live ? "LIVE" : "Inactive"}</span>
               </div>
             </div>

@@ -54,7 +54,7 @@ export default async function OrderConfirmationPage(
           <div className="flex items-center justify-between">
             {FLOW.map((s, i) => (
               <div key={s} className="flex flex-1 flex-col items-center">
-                <span className={`grid h-7 w-7 place-items-center rounded-full border text-[10px] font-bold ${i <= flowIndex ? "border-ink bg-ink text-cream" : "border-line text-ink/40"}`}>
+                <span className={`grid h-7 w-7 place-items-center rounded-full border text-[10px] font-bold ${i <= flowIndex ? "border-brand bg-brand text-cream" : "border-line text-ink/40"}`}>
                   {i < flowIndex ? "✓" : i + 1}
                 </span>
                 <span className={`mt-1.5 hidden text-[9px] font-bold uppercase tracking-[0.1em] sm:block ${i <= flowIndex ? "text-ink" : "text-ink/40"}`}>{s}</span>

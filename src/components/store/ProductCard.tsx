@@ -39,7 +39,7 @@ export default function ProductCard({ product, priority = false }: { product: an
           {price.source === "FLASH" && <span className="badge-flash">Flash −{price.discountPercent}%</span>}
           {price.source !== "FLASH" && price.discountPercent > 0 && <span className="badge-sale">−{price.discountPercent}%</span>}
           {product.isNewArrival && <span className="badge-new">New</span>}
-          {outOfStock && <span className="badge bg-ink/80 text-cream">Sold Out</span>}
+          {outOfStock && <span className="badge bg-brand/80 text-cream">Sold Out</span>}
         </div>
 
         <div className="absolute right-3 top-3 opacity-0 transition-opacity group-hover:opacity-100 max-lg:opacity-100">

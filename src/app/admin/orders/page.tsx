@@ -105,7 +105,7 @@ export default async function AdminOrdersPage(props: { searchParams: Promise<Rec
       {pages > 1 && (
         <div className="mt-4 flex gap-2">
           {Array.from({ length: pages }, (_, i) => (
-            <Link key={i} href={pageHref(i + 1)} className={cn("border px-3 py-1.5 text-xs font-semibold", page === i + 1 ? "border-ink bg-ink text-cream" : "border-line bg-white")}>
+            <Link key={i} href={pageHref(i + 1)} className={cn("border px-3 py-1.5 text-xs font-semibold", page === i + 1 ? "border-brand bg-brand text-cream" : "border-line bg-white")}>
               {i + 1}
             </Link>
           ))}

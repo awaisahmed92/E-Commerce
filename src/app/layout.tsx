@@ -3,6 +3,7 @@ import { Amiri, Fraunces, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/providers";
 import { getAllSettings } from "@/services/settings.service";
+import { brandStyle, normalizeThemeColor } from "@/lib/theme";
 import { STORE_NAME } from "@/lib/utils";
 
 const sans = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
@@ -32,11 +33,15 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export const viewport: Viewport = { themeColor: "#3c2416", width: "device-width", initialScale: 1 };
+export async function generateViewport(): Promise<Viewport> {
+  const settings = await getAllSettings();
+  return { themeColor: normalizeThemeColor(settings.themeColor), width: "device-width", initialScale: 1 };
+}
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const settings = await getAllSettings();
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable} ${display.variable} ${arabic.variable}`}>
+    <html lang="en" style={brandStyle(settings.themeColor) as React.CSSProperties} className={`${sans.variable} ${mono.variable} ${display.variable} ${arabic.variable}`}>
       <body className="min-h-screen bg-paper font-sans text-night antialiased">
         <Providers>{children}</Providers>
       </body>

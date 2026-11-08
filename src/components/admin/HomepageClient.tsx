@@ -102,7 +102,7 @@ export default function HomepageClient({
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
                   <p className="font-semibold">{s.title || SECTION_TYPES.find(([v]) => v === s.type)?.[1]}</p>
-                  <span className="badge bg-ink/10 text-ink/60">{s.type.replace(/_/g, " ")}</span>
+                  <span className="badge bg-brand/10 text-ink/60">{s.type.replace(/_/g, " ")}</span>
                   {hasProductPicker(s.type) && cfg.productIds?.length > 0 && <span className="badge bg-gold/15 text-gold">Manual: {cfg.productIds.length} products</span>}
                 </div>
                 <p className="truncate text-xs text-ink/40">{s.subtitle}</p>
@@ -125,7 +125,7 @@ export default function HomepageClient({
       {/* editor drawer */}
       {editing && (
         <div className="fixed inset-0 z-50">
-          <div className="absolute inset-0 bg-ink/50" onClick={() => setEditing(null)} />
+          <div className="absolute inset-0 bg-brand/50" onClick={() => setEditing(null)} />
           <form onSubmit={saveEdit} className="absolute inset-y-0 right-0 w-full max-w-lg overflow-y-auto bg-white p-6 shadow-2xl">
             <div className="mb-5 flex items-center justify-between">
               <h2 className="font-serif text-xl">Edit: {SECTION_TYPES.find(([v]) => v === editing.type)?.[1]}</h2>

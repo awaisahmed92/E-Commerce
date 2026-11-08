@@ -65,7 +65,7 @@ export default function BuyersPage() {
         </div>
       </section>
 
-      <section className="bg-night py-16 text-paper sm:py-24">
+      <section className="bg-brand py-16 text-paper sm:py-24">
         <div className="container-x">
           <div className="grid gap-10 lg:grid-cols-[.65fr_1.35fr]">
             <div>
@@ -75,7 +75,7 @@ export default function BuyersPage() {
             </div>
             <ol className="grid gap-px bg-paper/10 sm:grid-cols-2">
               {steps.map(([number, title, body]) => (
-                <li key={number} className="bg-night p-6 sm:p-8">
+                <li key={number} className="bg-brand p-6 sm:p-8">
                   <p className="font-mono text-[10px] tracking-[0.2em] text-amber">{number}</p>
                   <h3 className="mt-5 font-display text-3xl">{title}</h3>
                   <p className="mt-3 text-sm leading-6 text-paper/58">{body}</p>

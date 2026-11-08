@@ -75,7 +75,7 @@ export default function PurchasePanel({ product, promos }: { product: any; promo
                   onClick={() => setSize(s)}
                   className={cn(
                     "min-w-11 border px-3.5 py-2.5 text-sm font-semibold transition-colors",
-                    size === s ? "border-ink bg-ink text-cream" : anyStock ? "border-line bg-white hover:border-ink" : "border-line bg-white text-ink/30 line-through"
+                    size === s ? "border-brand bg-brand text-cream" : anyStock ? "border-line bg-white hover:border-ink" : "border-line bg-white text-ink/30 line-through"
                   )}
                 >
                   {s}
@@ -96,7 +96,7 @@ export default function PurchasePanel({ product, promos }: { product: any; promo
                 onClick={() => setColor(c)}
                 className={cn(
                   "border px-3.5 py-2.5 text-sm font-semibold transition-colors",
-                  color === c ? "border-ink bg-ink text-cream" : "border-line bg-white hover:border-ink"
+                  color === c ? "border-brand bg-brand text-cream" : "border-line bg-white hover:border-ink"
                 )}
               >
                 {c}

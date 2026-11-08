@@ -1,4 +1,5 @@
 import prisma from "@/lib/db";
+import { normalizeThemeColor, sanitizeLogoUrl } from "@/lib/theme";
 
 export const DEFAULT_SETTINGS: Record<string, string> = {
   storeName: "Khairpur Dates House",
@@ -16,7 +17,15 @@ export const DEFAULT_SETTINGS: Record<string, string> = {
   lowStockDefaultThreshold: "5",
   defaultMarginType: "percent",
   defaultMarginValue: "0",
+  themeColor: "#3c2416",
+  logoUrl: "",
 };
+
+function cleanSetting(key: string, value: string) {
+  if (key === "themeColor") return normalizeThemeColor(value);
+  if (key === "logoUrl") return sanitizeLogoUrl(value);
+  return value;
+}
 
 function databaseConfigured() {
   return Boolean(process.env.DATABASE_URL);
@@ -44,6 +53,7 @@ export async function getAllSettings(): Promise<Record<string, string>> {
 
 export async function updateSettings(values: Record<string, string>) {
   for (const [key, value] of Object.entries(values)) {
-    await prisma.setting.upsert({ where: { key }, update: { value }, create: { key, value } });
+    const clean = cleanSetting(key, String(value ?? ""));
+    await prisma.setting.upsert({ where: { key }, update: { value: clean }, create: { key, value: clean } });
   }
 }

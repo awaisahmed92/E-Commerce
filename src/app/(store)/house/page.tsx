@@ -13,7 +13,7 @@ export default function HousePage() {
   return (
     <div className="bg-paper">
       <section className="container-x py-8 sm:py-12">
-        <div className="grid min-h-[620px] overflow-hidden bg-night lg:grid-cols-[.88fr_1.12fr]">
+        <div className="grid min-h-[620px] overflow-hidden bg-brand lg:grid-cols-[.88fr_1.12fr]">
           <div className="flex flex-col justify-between px-7 py-10 text-paper sm:px-12 sm:py-14 lg:px-16">
             <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-paper/55">Our story · Khairpur Mirs</p>
             <div className="my-16">
@@ -39,7 +39,7 @@ export default function HousePage() {
                 ["Aseel", "Signature fruit"],
                 ["Hand sorted", "Packing standard"],
               ].map(([value, label]) => (
-                <div key={value} className="bg-night/75 px-3 py-5 text-paper">
+                <div key={value} className="bg-brand/75 px-3 py-5 text-paper">
                   <p className="font-display text-xl sm:text-2xl">{value}</p>
                   <p className="mt-1 font-mono text-[8px] uppercase tracking-[0.18em] text-paper/55">{label}</p>
                 </div>

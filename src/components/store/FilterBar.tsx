@@ -101,7 +101,7 @@ export default function FilterBar({ meta }: { meta: Meta }) {
                 onClick={() => setParams({ size: s === activeSize ? null : s })}
                 className={cn(
                   "border px-3 py-1.5 text-xs font-semibold transition-colors",
-                  activeSize === s ? "border-ink bg-ink text-cream" : "border-line bg-white hover:border-ink"
+                  activeSize === s ? "border-brand bg-brand text-cream" : "border-line bg-white hover:border-ink"
                 )}
               >
                 {s}
@@ -122,7 +122,7 @@ export default function FilterBar({ meta }: { meta: Meta }) {
                 onClick={() => setParams({ color: c === activeColor ? null : c })}
                 className={cn(
                   "border px-3 py-1.5 text-xs font-semibold transition-colors",
-                  activeColor === c ? "border-ink bg-ink text-cream" : "border-line bg-white hover:border-ink"
+                  activeColor === c ? "border-brand bg-brand text-cream" : "border-line bg-white hover:border-ink"
                 )}
               >
                 {c}
@@ -175,7 +175,7 @@ export default function FilterBar({ meta }: { meta: Meta }) {
       </button>
       {open && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="absolute inset-0 bg-ink/40" onClick={() => setOpen(false)} />
+          <div className="absolute inset-0 bg-brand/40" onClick={() => setOpen(false)} />
           <div className="absolute inset-y-0 right-0 w-[85%] max-w-sm overflow-y-auto bg-cream p-6">
             <div className="mb-6 flex items-center justify-between">
               <p className="text-sm font-bold uppercase tracking-[0.2em]">Filters</p>

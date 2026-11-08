@@ -80,12 +80,12 @@ export default async function AdminProductsPage(props: { searchParams: Promise<R
                     <span className={cn("font-semibold", p.totalStock === 0 ? "text-rose-600" : low ? "text-amber-600" : "")}>{p.totalStock}</span>
                   </td>
                   <td className="admin-td">
-                    <span className={cn("badge", p.status === "ACTIVE" ? "bg-emerald-100 text-emerald-800" : p.status === "DRAFT" ? "bg-slate-100 text-slate-600" : "bg-ink/10 text-ink/50")}>{p.status}</span>
+                    <span className={cn("badge", p.status === "ACTIVE" ? "bg-emerald-100 text-emerald-800" : p.status === "DRAFT" ? "bg-slate-100 text-slate-600" : "bg-brand/10 text-ink/50")}>{p.status}</span>
                   </td>
                   <td className="admin-td">
                     <div className="flex gap-1">
                       {p.isFeatured && <span className="badge bg-gold/15 text-gold">F</span>}
-                      {p.isNewArrival && <span className="badge bg-ink/10 text-ink">N</span>}
+                      {p.isNewArrival && <span className="badge bg-brand/10 text-ink">N</span>}
                       {p.isBestSeller && <span className="badge bg-clay/20 text-claydark">B</span>}
                     </div>
                   </td>
@@ -109,7 +109,7 @@ export default async function AdminProductsPage(props: { searchParams: Promise<R
       {pages > 1 && (
         <div className="mt-4 flex gap-2">
           {Array.from({ length: pages }, (_, i) => (
-            <Link key={i} href={pageHref(i + 1)} className={cn("border px-3 py-1.5 text-xs font-semibold", page === i + 1 ? "border-ink bg-ink text-cream" : "border-line bg-white")}>
+            <Link key={i} href={pageHref(i + 1)} className={cn("border px-3 py-1.5 text-xs font-semibold", page === i + 1 ? "border-brand bg-brand text-cream" : "border-line bg-white")}>
               {i + 1}
             </Link>
           ))}

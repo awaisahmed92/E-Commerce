@@ -163,7 +163,7 @@ export default function CheckoutClient() {
                   i === step ? "text-ink" : stepOk(i) ? "text-claydark" : "text-ink/35"
                 )}
               >
-                <span className={cn("grid h-6 w-6 place-items-center rounded-full border text-[10px]", i === step ? "border-ink bg-ink text-cream" : stepOk(i) ? "border-claydark text-claydark" : "border-line")}>
+                <span className={cn("grid h-6 w-6 place-items-center rounded-full border text-[10px]", i === step ? "border-brand bg-brand text-cream" : stepOk(i) ? "border-claydark text-claydark" : "border-line")}>
                   {stepOk(i) ? "✓" : i + 1}
                 </span>
                 {label}
@@ -310,7 +310,7 @@ export default function CheckoutClient() {
             <div key={l.id} className="flex items-center gap-3">
               <div className="relative h-14 w-11 shrink-0 overflow-hidden bg-sand">
                 {l.image && <img src={l.image} alt="" className="h-full w-full object-cover" />}
-                <span className="absolute right-0 top-0 grid h-4 min-w-4 place-items-center bg-ink px-1 text-[9px] font-bold text-cream">{l.quantity}</span>
+                <span className="absolute right-0 top-0 grid h-4 min-w-4 place-items-center bg-brand px-1 text-[9px] font-bold text-cream">{l.quantity}</span>
               </div>
               <div className="flex-1 text-xs">
                 <p className="font-semibold leading-tight">{l.name}</p>

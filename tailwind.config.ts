@@ -7,6 +7,8 @@ export default {
       colors: {
         night: "#3c2416",
         ink: "#5a3a28",
+        brand: "rgb(var(--brand) / <alpha-value>)",
+        branddark: "rgb(var(--brand-dark) / <alpha-value>)",
         paper: "#fbf6ee",
         cream: "#fbf6ee",
         sand: "#f3e6d4",

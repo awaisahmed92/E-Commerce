@@ -9,8 +9,8 @@ export default function QuickAddButton({ product }: { product: any }) {
   const [state, setState] = useState<"idle" | "busy" | "added" | "error">("idle");
 
   const base = product.inStock
-    ? "block w-full bg-ink/90 py-3 text-center text-[11px] font-bold uppercase tracking-[0.22em] text-cream backdrop-blur transition-colors hover:bg-claydark"
-    : "block w-full cursor-not-allowed bg-ink/40 py-3 text-center text-[11px] font-bold uppercase tracking-[0.22em] text-cream/80";
+    ? "block w-full bg-brand/90 py-3 text-center text-[11px] font-bold uppercase tracking-[0.22em] text-cream backdrop-blur transition-colors hover:bg-branddark"
+    : "block w-full cursor-not-allowed bg-brand/40 py-3 text-center text-[11px] font-bold uppercase tracking-[0.22em] text-cream/80";
 
   if (!product.inStock) return <span className={base}>Sold Out</span>;
 

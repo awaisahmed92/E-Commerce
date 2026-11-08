@@ -35,7 +35,7 @@ export default function Pagination({
             href={buildHref(p)}
             className={cn(
               "border px-3.5 py-2 text-xs font-semibold transition-colors",
-              p === page ? "border-ink bg-ink text-cream" : "border-line bg-white hover:border-ink"
+              p === page ? "border-brand bg-brand text-cream" : "border-line bg-white hover:border-ink"
             )}
           >
             {p}

@@ -44,7 +44,7 @@ export default function NewsletterForm({ dark = false }: { dark?: boolean }) {
           disabled={state.loading}
           className={cn(
             "whitespace-nowrap px-4 text-[11px] font-bold uppercase tracking-[0.18em] transition-colors disabled:opacity-60",
-            dark ? "bg-cream text-ink hover:bg-sand" : "bg-ink text-cream hover:bg-claydark"
+            dark ? "bg-cream text-ink hover:bg-sand" : "bg-brand text-cream hover:bg-branddark"
           )}
         >
           {state.loading ? <Spinner /> : "Subscribe"}

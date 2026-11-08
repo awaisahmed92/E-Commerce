@@ -213,7 +213,7 @@ export default function PromotionsClient({
               <div className="flex items-center gap-3">
                 <p className="font-semibold">{p.name}</p>
                 <span className={cn("badge", p.live ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-500")}>{p.live ? "LIVE" : p.isActive ? "Scheduled" : "Inactive"}</span>
-                <span className="badge bg-ink/10 text-ink/70">{p.type.replace(/_/g, " ")}</span>
+                <span className="badge bg-brand/10 text-ink/70">{p.type.replace(/_/g, " ")}</span>
               </div>
               <p className="mt-1 text-sm text-ink/60">
                 {p.type === "BUY_X_GET_Y"
