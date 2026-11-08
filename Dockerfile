@@ -26,4 +26,7 @@ ENV NODE_ENV=production
 ENV PORT=3000
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+# Bind the port Coolify proxies. Do not use the local port scanner here: if it
+# hops off 3000, the new container never receives traffic and the last deploy
+# looks like it "didn't update".
+CMD ["sh", "-c", "npx prisma db push --skip-generate && npx next start -H 0.0.0.0 -p ${PORT:-3000}"]

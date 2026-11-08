@@ -11,6 +11,11 @@ export const POST = handle(async (req: Request) => {
   const file = form.get("file");
   const folder = String(form.get("folder") || "products");
   if (!(file instanceof File)) return fail("No file provided.");
-  const result = await uploadFile(file, folder);
-  return ok(result);
+  try {
+    const result = await uploadFile(file, folder);
+    return ok(result);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Upload failed.";
+    return fail(message, 400);
+  }
 });

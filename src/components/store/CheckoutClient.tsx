@@ -1,11 +1,12 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useSession } from "@/stores/session";
 import { useCart } from "@/stores/cart";
 import { cn, formatMoney } from "@/lib/utils";
 import { Spinner } from "@/components/ui/primitives";
+import TurnstileField, { turnstileEnabled, type TurnstileHandle } from "./TurnstileField";
 
 const STEPS = ["Information", "Shipping Address", "Delivery", "Payment", "Review"];
 const CITIES = ["Karachi", "Lahore", "Islamabad", "Rawalpindi", "Hyderabad", "Faisalabad", "Multan", "Peshawar", "Quetta", "Sialkot", "Gujranwala", "Other"];
@@ -32,6 +33,7 @@ export default function CheckoutClient() {
   const [items, setItems] = useState<any[]>([]);
   const [placing, setPlacing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const turnstileRef = useRef<TurnstileHandle>(null);
 
   const [form, setForm] = useState({
     firstName: "", lastName: "", email: "", phone: "",
@@ -114,14 +116,21 @@ export default function CheckoutClient() {
   const placeOrder = async () => {
     setPlacing(true);
     setError(null);
+    const turnstileToken = turnstileEnabled() ? turnstileRef.current?.getToken() || "" : "";
+    if (turnstileEnabled() && !turnstileToken) {
+      setError("Please confirm you are not a robot.");
+      setPlacing(false);
+      return;
+    }
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, turnstileToken }),
       });
       const json = await res.json();
       if (!json.ok) {
+        turnstileRef.current?.reset();
         setError(json.error || "Could not place order.");
         setPlacing(false);
         return;
@@ -282,6 +291,7 @@ export default function CheckoutClient() {
                 </div>
               ))}
             </div>
+            <TurnstileField ref={turnstileRef} />
             <StepActions
               onBack={() => setStep(3)}
               onNext={placeOrder}

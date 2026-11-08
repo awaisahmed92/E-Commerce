@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
+import sharp from "sharp";
 
 /**
  * FileUploadService — provider interface.
@@ -12,8 +13,9 @@ export interface UploadResult {
   provider: "local" | "cloudinary";
 }
 
-const ALLOWED = ["image/jpeg", "image/png", "image/webp", "image/gif", "image/avif"];
-const MAX_BYTES = 8 * 1024 * 1024; // 8MB
+const MAX_BYTES = 8 * 1024 * 1024; // incoming cap — a raw 10MB+ camera photo is refused before it is read
+const MAX_EDGE = 1600;
+const WEBP_QUALITY = 75;
 
 /**
  * Identifies the real image format from its magic bytes. The client-supplied `Content-Type` and
@@ -40,18 +42,52 @@ function sniffImageType(buf: Buffer): { mime: string; ext: string } | null {
   return null;
 }
 
+/**
+ * Resize and re-encode so a phone photo is never written to disk at its original size.
+ * GIFs are stored only when they are already small; everything else becomes WebP.
+ */
+async function toStoredImage(buffer: Buffer, ext: string): Promise<{ buffer: Buffer; ext: string }> {
+  if (ext === "gif") {
+    if (buffer.length > 1_500_000) throw new Error("GIF is too large (max 1.5MB).");
+    return { buffer, ext: "gif" };
+  }
+
+  const source = sharp(buffer, { failOn: "none", limitInputPixels: 40_000_000, animated: false });
+  const meta = await source.metadata();
+  const width = meta.width ?? 0;
+  const height = meta.height ?? 0;
+  const alreadySmall = ext === "webp" && buffer.length <= 400 * 1024 && width > 0 && width <= MAX_EDGE && height <= MAX_EDGE;
+  if (alreadySmall) return { buffer, ext: "webp" };
+
+  const out = await sharp(buffer, { failOn: "none", limitInputPixels: 40_000_000, animated: false })
+    .rotate()
+    .resize({ width: MAX_EDGE, height: MAX_EDGE, fit: "inside", withoutEnlargement: true })
+    .webp({ quality: WEBP_QUALITY })
+    .toBuffer();
+  return { buffer: out, ext: "webp" };
+}
+
 export async function uploadFile(file: File, folder = "products"): Promise<UploadResult> {
-  if (!ALLOWED.includes(file.type)) throw new Error("Only image files (jpg/png/webp/gif/avif) are allowed.");
-  if (file.size > MAX_BYTES) throw new Error("File too large (max 8MB).");
+  if (file.size > MAX_BYTES) throw new Error("File too large (max 8MB). Choose a smaller photo.");
 
   const buffer = Buffer.from(await file.arrayBuffer());
   const sniffed = sniffImageType(buffer);
   if (!sniffed) throw new Error("File content doesn't match a supported image format (jpg/png/webp/gif/avif).");
 
-  if (process.env.STORAGE_PROVIDER === "cloudinary") {
-    return uploadToCloudinary(file, folder);
+  let stored: { buffer: Buffer; ext: string };
+  try {
+    stored = await toStoredImage(buffer, sniffed.ext);
+  } catch (error) {
+    if (error instanceof Error && error.message.startsWith("GIF")) throw error;
+    throw new Error("Could not process this image. Use a JPG or PNG photo.");
   }
-  return uploadLocal(buffer, sniffed.ext, folder);
+
+  if (process.env.STORAGE_PROVIDER === "cloudinary") {
+    const type = stored.ext === "webp" ? "image/webp" : sniffed.mime;
+    const compressed = new File([new Uint8Array(stored.buffer)], `upload.${stored.ext}`, { type });
+    return uploadToCloudinary(compressed, folder);
+  }
+  return uploadLocal(stored.buffer, stored.ext, folder);
 }
 
 async function uploadLocal(buffer: Buffer, ext: string, folder: string): Promise<UploadResult> {
