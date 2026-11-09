@@ -1,52 +1,67 @@
 import Link from "next/link";
 import ProductGrid from "@/components/store/ProductGrid";
 import NewsletterForm from "@/components/store/NewsletterForm";
+import HeroSlider, { type HeroCopy, type HeroSlide } from "@/components/store/HeroSlider";
 import { listProducts } from "@/services/product.service";
+import prisma from "@/lib/db";
 import { varieties } from "@/lib/content";
 
 export const dynamic = "force-dynamic";
 
 const benefits = ["Naturally sweet", "Hand sorted", "Grades kept apart", "From Khairpur"];
 
+const DEFAULT_HERO: HeroCopy = {
+  eyebrow: "Khairpur Mirs · Sindh",
+  title: "Premium khajoor,\npacked at the source.",
+  subtitle: "Aseel and selected dates, hand sorted by variety and grade, then delivered across Pakistan.",
+  buttonText: "Shop dates",
+  buttonLink: "/shop",
+  button2Text: "Wholesale inquiry",
+  button2Link: "/buyers",
+};
+
 export default async function HomePage() {
-  const [featured, bestSellers] = await Promise.all([
+  const [featured, bestSellers, heroSection] = await Promise.all([
     listProducts({ isFeatured: true, limit: 8 }),
     listProducts({ bestSelling: true, limit: 4 }),
+    prisma.homepageSection.findFirst({ where: { type: "HERO", isActive: true }, orderBy: { displayOrder: "asc" } }),
   ]);
+
+  let saved: Partial<HeroCopy> & { heroReady?: boolean; slides?: Array<Partial<HeroSlide> & { image?: string }> } = {};
+  try {
+    saved = JSON.parse(heroSection?.configJson || "{}");
+  } catch {
+    saved = {};
+  }
+  const copy: HeroCopy = saved.heroReady
+    ? {
+        eyebrow: saved.eyebrow ?? DEFAULT_HERO.eyebrow,
+        title: heroSection?.title || DEFAULT_HERO.title,
+        subtitle: heroSection?.subtitle || DEFAULT_HERO.subtitle,
+        buttonText: heroSection?.buttonText || DEFAULT_HERO.buttonText,
+        buttonLink: heroSection?.buttonLink || DEFAULT_HERO.buttonLink,
+        button2Text: saved.button2Text ?? DEFAULT_HERO.button2Text,
+        button2Link: saved.button2Link ?? DEFAULT_HERO.button2Link,
+      }
+    : DEFAULT_HERO;
+
+  const savedSlides: HeroSlide[] = saved.heroReady && Array.isArray(saved.slides)
+    ? saved.slides
+        .filter((slide) => slide?.image?.trim())
+        .map((slide) => ({
+          image: slide.image!.trim(),
+          title: slide.title,
+          subtitle: slide.subtitle,
+          buttonText: slide.buttonText,
+          buttonLink: slide.buttonLink,
+        }))
+    : [];
+
+  const slides: HeroSlide[] = savedSlides;
 
   return (
     <div className="fade-in">
-      <section className="relative min-h-[560px] overflow-hidden bg-brand text-white sm:min-h-[680px]">
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/images/film-boxes.jpg"
-          aria-hidden="true"
-        >
-          <source src="/video/khajoor.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
-        <div className="container-x relative flex min-h-[560px] items-center sm:min-h-[680px]">
-          <div className="max-w-2xl py-20">
-            <p className="font-mono text-[11px] uppercase tracking-[0.32em] text-white/75">Khairpur Mirs · Sindh</p>
-            <h1 className="mt-5 font-display text-5xl leading-[0.95] tracking-tight sm:text-7xl">
-              Premium khajoor,
-              <br />
-              packed at the source.
-            </h1>
-            <p className="mt-6 max-w-lg text-base leading-7 text-white/80">
-              Aseel and selected dates, hand sorted by variety and grade, then delivered across Pakistan.
-            </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Link href="/shop" className="btn bg-amber text-white hover:bg-clay">Shop dates</Link>
-              <Link href="/buyers" className="btn border border-white/60 text-white hover:bg-white hover:text-night">Wholesale inquiry</Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSlider slides={slides} copy={copy} />
 
       <section className="border-b border-night/10 bg-off">
         <ul className="container-x grid grid-cols-2 gap-6 py-8 md:grid-cols-4">

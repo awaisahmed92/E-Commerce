@@ -23,12 +23,20 @@ export default function NavigationLoader({ logoUrl }: { logoUrl?: string }) {
       if (url.origin !== window.location.origin || url.href === window.location.href || url.hash) return;
       setLoading(true);
     };
-    const onPopState = () => setLoading(true);
+    // Back/forward restores a page that is already open. Treating that as a
+    // new visit leaves this overlay up, because the route often does not
+    // change again after the browser has moved.
+    const onPopState = () => setLoading(false);
+    const onPageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) setLoading(false);
+    };
     document.addEventListener("click", onClick);
     window.addEventListener("popstate", onPopState);
+    window.addEventListener("pageshow", onPageShow);
     return () => {
       document.removeEventListener("click", onClick);
       window.removeEventListener("popstate", onPopState);
+      window.removeEventListener("pageshow", onPageShow);
     };
   }, []);
 

@@ -9,7 +9,7 @@ const POSITIONS: [string, string, string][] = [
   [
     "HOME_HERO",
     "Homepage Hero",
-    "Shown behind the homepage hero heading. Title/Subtitle here only show if the Homepage Builder's Hero section (Admin → Homepage Builder) leaves its own Heading/Subheading blank. The Desktop/Mobile Image here work the other way round — they win over the Hero section's own image whenever set here.",
+    "Not the homepage film. Change the homepage photos and text in Admin → Homepage Builder → Hero Section.",
   ],
   [
     "HOME_MIDDLE",

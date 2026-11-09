@@ -59,6 +59,21 @@ export default function HomepageClient({
       productIds: editing.cfg.productIds ?? [],
       categoryIds: editing.cfg.categoryIds ?? [],
       maxItems: Number(editing.cfg.maxItems) || 8,
+      eyebrow: editing.cfg.eyebrow || "",
+      button2Text: editing.cfg.button2Text || "",
+      button2Link: editing.cfg.button2Link || "",
+      heroReady: editing.type === "HERO" ? true : Boolean(editing.cfg.heroReady),
+      slides: Array.isArray(editing.cfg.slides)
+        ? editing.cfg.slides
+            .filter((slide: { image?: string }) => slide?.image?.trim())
+            .map((slide: { image?: string; title?: string; subtitle?: string; buttonText?: string; buttonLink?: string }) => ({
+              image: String(slide.image).trim(),
+              title: String(slide.title || "").trim(),
+              subtitle: String(slide.subtitle || "").trim(),
+              buttonText: String(slide.buttonText || "").trim(),
+              buttonLink: String(slide.buttonLink || "").trim(),
+            }))
+        : [],
     };
     await fetch("/api/admin/homepage", {
       method: "POST",
@@ -81,6 +96,34 @@ export default function HomepageClient({
   };
 
   const hasProductPicker = (t: string) => ["NEW_ARRIVALS", "FEATURED_PRODUCTS", "BEST_SELLERS"].includes(t);
+
+  const openSection = (section: any) => {
+    const cfg = parseCfg(section);
+    if (section.type === "HERO" && !cfg.heroReady) {
+      setEditing({
+        ...section,
+        title: "Premium khajoor,\npacked at the source.",
+        subtitle: "Aseel and selected dates, hand sorted by variety and grade, then delivered across Pakistan.",
+        buttonText: "Shop dates",
+        buttonLink: "/shop",
+        cfg: {
+          ...cfg,
+          eyebrow: "Khairpur Mirs · Sindh",
+          button2Text: "Wholesale inquiry",
+          button2Link: "/buyers",
+          slides: [],
+        },
+      });
+      return;
+    }
+    setEditing({ ...section, cfg: { ...cfg, slides: cfg.slides ?? [] } });
+  };
+
+  const patchSlide = (index: number, patch: Record<string, string>) => {
+    const slides = [...(editing.cfg.slides ?? [])];
+    slides[index] = { ...slides[index], ...patch };
+    setEditing({ ...editing, cfg: { ...editing.cfg, slides } });
+  };
 
   return (
     <div>
@@ -114,7 +157,7 @@ export default function HomepageClient({
                 />
                 Visible
               </label>
-              <button className="text-[11px] font-bold uppercase tracking-[0.12em] text-claydark hover:underline" onClick={() => setEditing({ ...s, cfg })}>
+              <button className="text-[11px] font-bold uppercase tracking-[0.12em] text-claydark hover:underline" onClick={() => openSection(s)}>
                 {busyId === s.id ? <Spinner className="h-3 w-3" /> : "Edit"}
               </button>
             </div>
@@ -134,20 +177,79 @@ export default function HomepageClient({
             <div className="space-y-4">
               {editing.type === "HERO" && (
                 <p className="border border-gold/30 bg-gold/10 px-3 py-2 text-xs text-ink/70">
-                  Heading and Subheading here take priority over the "Homepage Hero" banner in Admin → Banners —
-                  leave either blank to fall back to that banner's matching field. The Image field below works the
-                  other way round: the banner's image is used whenever the banner has one, regardless of what's set
-                  here. To make an image set here actually show, the banner must have no image of its own.
+                  Save this and the homepage hero uses it. Add a photo for each slide below. Leave a slide’s heading blank to keep the heading above. With no photos, the date video stays behind this text.
                 </p>
               )}
-              <div><label className="admin-label">Heading</label><input className="admin-input" value={editing.title ?? ""} onChange={(e) => setEditing({ ...editing, title: e.target.value })} /></div>
-              <div><label className="admin-label">Subheading</label><input className="admin-input" value={editing.subtitle ?? ""} onChange={(e) => setEditing({ ...editing, subtitle: e.target.value })} /></div>
+              {editing.type === "HERO" && (
+                <div>
+                  <label className="admin-label">Small line</label>
+                  <input className="admin-input" value={editing.cfg.eyebrow ?? ""} onChange={(e) => setEditing({ ...editing, cfg: { ...editing.cfg, eyebrow: e.target.value } })} placeholder="Khairpur Mirs · Sindh" />
+                </div>
+              )}
+              <div>
+                <label className="admin-label">Heading</label>
+                {editing.type === "HERO" ? (
+                  <textarea className="admin-input min-h-[72px]" value={editing.title ?? ""} onChange={(e) => setEditing({ ...editing, title: e.target.value })} placeholder={"Premium khajoor,\npacked at the source."} />
+                ) : (
+                  <input className="admin-input" value={editing.title ?? ""} onChange={(e) => setEditing({ ...editing, title: e.target.value })} />
+                )}
+              </div>
+              <div><label className="admin-label">Subheading</label><textarea className="admin-input min-h-[72px]" value={editing.subtitle ?? ""} onChange={(e) => setEditing({ ...editing, subtitle: e.target.value })} /></div>
               <div className="grid grid-cols-2 gap-4">
                 <div><label className="admin-label">Button Text</label><input className="admin-input" value={editing.buttonText ?? ""} onChange={(e) => setEditing({ ...editing, buttonText: e.target.value })} /></div>
                 <div><label className="admin-label">Button Link</label><input className="admin-input" value={editing.buttonLink ?? ""} onChange={(e) => setEditing({ ...editing, buttonLink: e.target.value })} /></div>
               </div>
+              {editing.type === "HERO" && (
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="admin-label">Second button text</label>
+                    <input className="admin-input" value={editing.cfg.button2Text ?? ""} onChange={(e) => setEditing({ ...editing, cfg: { ...editing.cfg, button2Text: e.target.value } })} placeholder="Wholesale inquiry" />
+                  </div>
+                  <div>
+                    <label className="admin-label">Second button link</label>
+                    <input className="admin-input" value={editing.cfg.button2Link ?? ""} onChange={(e) => setEditing({ ...editing, cfg: { ...editing.cfg, button2Link: e.target.value } })} placeholder="/buyers" />
+                  </div>
+                </div>
+              )}
 
-              {["PROMO_BANNER", "SALE_BANNER", "HERO"].includes(editing.type) && (
+              {editing.type === "HERO" && (
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <label className="admin-label mb-0">Slide photos</label>
+                    <button
+                      type="button"
+                      className="text-[11px] font-bold uppercase tracking-[0.12em] text-claydark hover:underline"
+                      onClick={() => setEditing({ ...editing, cfg: { ...editing.cfg, slides: [...(editing.cfg.slides ?? []), { image: "", title: "", subtitle: "", buttonText: "", buttonLink: "" }] } })}
+                    >
+                      Add photo
+                    </button>
+                  </div>
+                  {(editing.cfg.slides ?? []).length === 0 && <p className="text-xs text-ink/50">No photos yet. The date film keeps playing until you add one.</p>}
+                  {(editing.cfg.slides ?? []).map((slide: { image?: string; title?: string; subtitle?: string; buttonText?: string; buttonLink?: string }, index: number) => (
+                    <div key={index} className="space-y-2 border border-ink/10 p-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink/50">Slide {index + 1}</span>
+                        <button
+                          type="button"
+                          className="text-[11px] font-bold uppercase tracking-[0.12em] text-red-700 hover:underline"
+                          onClick={() => setEditing({ ...editing, cfg: { ...editing.cfg, slides: editing.cfg.slides.filter((_: unknown, slideIndex: number) => slideIndex !== index) } })}
+                        >
+                          Remove
+                        </button>
+                      </div>
+                      <ImagePicker label="Photo" value={slide.image ?? ""} onChange={(url) => patchSlide(index, { image: url })} folder="homepage" />
+                      <input className="admin-input" value={slide.title ?? ""} placeholder="Heading for this photo only" onChange={(e) => patchSlide(index, { title: e.target.value })} />
+                      <input className="admin-input" value={slide.subtitle ?? ""} placeholder="Subheading for this photo only" onChange={(e) => patchSlide(index, { subtitle: e.target.value })} />
+                      <div className="grid grid-cols-2 gap-2">
+                        <input className="admin-input" value={slide.buttonText ?? ""} placeholder="Button text" onChange={(e) => patchSlide(index, { buttonText: e.target.value })} />
+                        <input className="admin-input" value={slide.buttonLink ?? ""} placeholder="Button link" onChange={(e) => patchSlide(index, { buttonLink: e.target.value })} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {["PROMO_BANNER", "SALE_BANNER"].includes(editing.type) && (
                 <ImagePicker label="Image" value={editing.image ?? ""} onChange={(url) => setEditing({ ...editing, image: url })} folder="homepage" />
               )}
 
